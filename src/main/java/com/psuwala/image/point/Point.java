@@ -27,7 +27,7 @@ public class Point implements Transformable<Point>{
     }
 
     public Point(double x, double y) {
-        this(new SimpleMatrix(1, 2, true, new double[]{x, y}));
+        this(new SimpleMatrix(2, 1, true, new double[]{x, y}));
     }
 
     public Point(SimpleMatrix simpleMatrix) {
