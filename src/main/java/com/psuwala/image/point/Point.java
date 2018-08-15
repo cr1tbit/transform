@@ -2,7 +2,9 @@ package com.psuwala.image.point;
 
 import org.ejml.simple.SimpleMatrix;
 
+import static java.lang.Math.cos;
 import static java.lang.Math.pow;
+import static java.lang.Math.sin;
 
 /**
  * TODO: Document this class / interface here
@@ -28,8 +30,12 @@ public class Point {
         this(new SimpleMatrix(1, 2, true, new double[]{x, y}));
     }
 
-    public Point(SimpleMatrix simpleMatrix){
+    public Point(SimpleMatrix simpleMatrix) {
         this.coords = simpleMatrix;
+    }
+
+    public Point negative(){
+        return new Point(this.getCoords().negative());
     }
 
     public double distance(Point point) {
@@ -37,7 +43,7 @@ public class Point {
     }
 
     public Point translate(double x, double y) {
-        return translate(new Point(x,y));
+        return translate(new Point(x, y));
     }
 
     public Point translate(Point p) {
@@ -46,5 +52,16 @@ public class Point {
 
     public Point translate(SimpleMatrix translation) {
         return new Point(getCoords().plus(translation));
+    }
+
+    public Point rotate(double angle) {
+        SimpleMatrix rotationMatrix = new SimpleMatrix(2, 2, true,
+                new double[]{cos(angle), -sin(angle), sin(angle), cos(angle)}
+        );
+        return new Point(rotationMatrix.mult(getCoords()));
+    }
+
+    public Point rotateBy(double angle, Point p){
+        return translate(p.negative()).rotate(angle).translate(p);
     }
 }
