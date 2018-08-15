@@ -11,18 +11,23 @@ import java.awt.image.BufferedImage;
  */
 public class ShowUtil {
 
-    public static JFrame showImage(BufferedImage image) {
-        JFrame jFrame = new JFrame("marzanna") {
+    public static JFrame showImage(BufferedImage image, double scale) {
+        JFrame jFrame = new JFrame("marzanna");
+
+        JPanel pane = new JPanel() {
             @Override
-            public void paint(Graphics g) {
-                super.paintComponents(g);
-                g.setColor(Color.red);
-                g.fillRect(0, 0, 200, 200);
-                g.drawImage(image, 10, 10, null);
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ((Graphics2D) g).scale(scale, scale);
+                g.drawImage(image, 0, 0, null);
             }
         };
 
-        jFrame.setSize(image.getWidth() + 200, image.getHeight() + 200);
+        jFrame.setSize((int) (image.getWidth() * scale), (int) (image.getHeight() * scale) + 20);
+        jFrame.setResizable(false);
+        jFrame.add(pane);
+        jFrame.getContentPane().setPreferredSize(new Dimension((int) (image.getWidth() * scale), (int) (image.getHeight() * scale)));
+        jFrame.setUndecorated(false);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 

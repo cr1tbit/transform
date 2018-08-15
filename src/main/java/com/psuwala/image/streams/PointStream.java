@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.lang.Math.round;
+
 /**
  * TODO: Document this class / interface here
  *
@@ -55,8 +57,8 @@ public class PointStream {
 
         points.stream().forEach(x ->
                 bufferedImage.setRGB(
-                        (int) x.getX() - minX,
-                        (int) x.getY() - minY,
+                        (int)round(x.getX() - minX),
+                        (int)round(x.getY() - minY),
                         new Color(0).getRGB()
                 )
         );

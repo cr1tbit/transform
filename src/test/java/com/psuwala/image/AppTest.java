@@ -18,7 +18,7 @@ public class AppTest {
     @Test
     @Ignore
     public void showTestImagexD() throws IOException, InterruptedException {
-        JFrame jFrame = ShowUtil.showImage(ImageIO.read(AppTest.class.getResourceAsStream("/002112.bmp")));
+        JFrame jFrame = ShowUtil.showImage(ImageIO.read(AppTest.class.getResourceAsStream("/002112.bmp")), 100.0);
         while(jFrame.isVisible()){
             Thread.sleep(100);
         }
