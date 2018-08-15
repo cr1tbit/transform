@@ -16,11 +16,19 @@ import java.util.stream.Stream;
 public class Complex implements Transformable<Complex> {
     private final List<Point> points;
 
+    //don't use it please ;-;
+    public Complex(){
+        points = Collections.emptyList();
+    }
+
     public Complex(Point point) {
         points = Collections.singletonList(point);
     }
 
     public Complex(List<Point> points) {
+        if (points.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.points = points;
     }
 
@@ -56,5 +64,13 @@ public class Complex implements Transformable<Complex> {
                 .map(Point::getCoords)
                 .reduce(zero, SimpleBase::plus)
                 .divide(points.size());
+    }
+
+    public double distance(Complex complex) {
+        return this.points.stream()
+                .flatMap(a ->
+                        complex.getPoints().stream().map(a::distance)
+                ).min(Double::compare)
+                .get();
     }
 }

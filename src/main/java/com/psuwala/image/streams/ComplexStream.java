@@ -16,4 +16,7 @@ public class ComplexStream {
         this.points = complexes;
     }
 
+    public List<Complex> getPoints() {
+        return points;
+    }
 }
