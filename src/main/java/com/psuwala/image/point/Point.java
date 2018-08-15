@@ -39,7 +39,7 @@ public class Point implements Transformable<Point>{
     }
 
     public double distance(Point point) {
-        return pow(pow(point.getX() - this.getX(), 2) + pow(point.getY() - this.getY(), 2), 1 / 2);
+        return pow(pow(point.getX() - this.getX(), 2) + pow(point.getY() - this.getY(), 2), 1.0 / 2.0);
     }
 
     public Point translate(double x, double y) {
