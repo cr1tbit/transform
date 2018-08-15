@@ -29,19 +29,6 @@ public class PointStream {
         return points;
     }
 
-    public ComplexStream group(double distanceThreshold) {
-        List<Complex> complexList = points.stream().map(Complex::new).collect(Collectors.toList());
-        List<Complex> grouped = new LinkedList<>();
-
-        while (!complexList.isEmpty()) {
-            Complex head = complexList.get(0);
-            complexList = complexList.subList(1, complexList.size());
-            grouped.add(concatComplexes(extractNeighbours(Arrays.asList(head), complexList, distanceThreshold)));
-        }
-
-        return new ComplexStream(grouped);
-    }
-
     public BufferedImage draw() {
         int minX = points.stream().map(Point::getX).min(Double::compareTo).orElse(0.0).intValue();
         int minY = points.stream().map(Point::getY).min(Double::compareTo).orElse(0.0).intValue();
@@ -66,6 +53,20 @@ public class PointStream {
         return bufferedImage;
     }
 
+    public ComplexStream group(double distanceThreshold) {
+        List<Complex> complexList = points.stream().map(Complex::new).collect(Collectors.toList());
+        List<Complex> grouped = new LinkedList<>();
+
+        while (!complexList.isEmpty()) {
+            Complex head = complexList.get(0);
+            complexList = complexList.subList(1, complexList.size());
+            grouped.add(concatComplexes(extractNeighbours(Arrays.asList(head), complexList, distanceThreshold)));
+        }
+
+        return new ComplexStream(grouped);
+    }
+
+
     static private Complex concatComplexes(Stream<Complex> complexStream) {
         return complexStream.reduce(new Complex(), Complex::add);
     }
@@ -76,7 +77,7 @@ public class PointStream {
                 .collect(Collectors.toList());
 
         if (neighbours.isEmpty())
-            return Stream.empty();
+            return extractees.stream();
 
         toExtract.removeAll(neighbours);
 
