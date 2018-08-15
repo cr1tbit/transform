@@ -64,4 +64,8 @@ public class Point implements Transformable<Point>{
     public Point rotateBy(double angle, Transformable t){
         return translate(t.getCoords().negative()).rotate(angle).translate(t);
     }
+
+    public boolean equals(Point p){
+        return (getX() == p.getX())&&(getY() == p.getY());
+    }
 }
