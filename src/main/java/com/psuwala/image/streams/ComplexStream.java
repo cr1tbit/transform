@@ -3,6 +3,7 @@ package com.psuwala.image.streams;
 import com.psuwala.image.point.Complex;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * TODO: Document this class / interface here

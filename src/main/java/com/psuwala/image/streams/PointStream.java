@@ -3,6 +3,8 @@ package com.psuwala.image.streams;
 import com.psuwala.image.point.Complex;
 import com.psuwala.image.point.Point;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,11 +40,35 @@ public class PointStream {
         return new ComplexStream(grouped);
     }
 
-    static public Complex concatComplexes(Stream<Complex> complexStream) {
+    public BufferedImage draw() {
+        int minX = points.stream().map(Point::getX).min(Double::compareTo).orElse(0.0).intValue();
+        int minY = points.stream().map(Point::getY).min(Double::compareTo).orElse(0.0).intValue();
+
+        int maxX = points.stream().map(Point::getX).min(Double::compareTo).orElse(0.0).intValue();
+        int maxY = points.stream().map(Point::getY).min(Double::compareTo).orElse(0.0).intValue();
+
+        BufferedImage bufferedImage = new BufferedImage(maxX - minX + 1, maxY - minY + 1, BufferedImage.TYPE_INT_RGB);
+
+        Graphics2D g = (Graphics2D) bufferedImage.getGraphics();
+        g.setPaint(new Color(255, 255, 255));
+        g.fillRect(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
+
+        points.stream().forEach(x ->
+                bufferedImage.setRGB(
+                        (int) x.getX() - minX,
+                        (int) x.getY() - minY,
+                        new Color(0).getRGB()
+                )
+        );
+
+        return bufferedImage;
+    }
+
+    static private Complex concatComplexes(Stream<Complex> complexStream) {
         return complexStream.reduce(new Complex(), Complex::add);
     }
 
-    static public Stream<Complex> extractNeighbours(List<Complex> extractees, List<Complex> toExtract, double distanceThreshold) {
+    static private Stream<Complex> extractNeighbours(List<Complex> extractees, List<Complex> toExtract, double distanceThreshold) {
         List<Complex> neighbours = extractees.stream()
                 .flatMap(x -> toExtract.stream().filter(y -> x.distance(y) < distanceThreshold))
                 .collect(Collectors.toList());
