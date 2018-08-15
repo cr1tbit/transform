@@ -32,8 +32,8 @@ public class PointTest {
 
     @Test
     public void testEqualsHash() {
-        Point p1 = new Point (4.20,2.137);
-        Point p2 = new Point (4.20,2.137);
+        Point p1 = new Point(4.20, 2.137);
+        Point p2 = new Point(4.20, 2.137);
 
         assertTrue(p1.equals(p2));
 
@@ -74,37 +74,37 @@ public class PointTest {
                         true,
                         new double[]{1, 1}));
 
-        assertTrue(pointTranslated.distance(new Point(2,2)) <= ksiDelta);
+        assertTrue(pointTranslated.distance(new Point(2, 2)) <= ksiDelta);
     }
 
     @Test
     public void testRotateSimple() {
         assertEquals(new Point(1, 1)
-                .rotate(PI*1/2)
-                .distance(new Point(-1,1)),0.0,ksiDelta);
+                .rotate(PI * 1 / 2)
+                .distance(new Point(-1, 1)), 0.0, ksiDelta);
     }
 
     @Test
     public void testRotateAdvanced() {
         assertEquals(new Point(1, 1)
-                .rotate(PI*3/4)
-                .distance(new Point(-1.41,0)),0.0,ksiDelta);
+                .rotate(PI * 3 / 4)
+                .distance(new Point(-1.41, 0)), 0.0, ksiDelta);
     }
 
     @Test
     public void testRotateBySimple() {
-        Point p1 = new Point(1,1).rotateBy(PI,new Point (1,0));
+        Point p1 = new Point(1, 1).rotateBy(PI, new Point(1, 0));
 
-        assertEquals(p1.distance(new Point(1,-1)),0.0,ksiDelta);
+        assertEquals(p1.distance(new Point(1, -1)), 0.0, ksiDelta);
     }
+
     // TODO add advanced rotation
     @Test
     public void testRotateByAdvanced() {
-        Point p1 = new Point(1,1).rotateBy(PI,new Point (1,0));
+        Point p1 = new Point(1, 1).rotateBy(PI, new Point(1, 0));
 
-        assertEquals(p1.distance(new Point(1,-1)),0.0,ksiDelta);
+        assertEquals(p1.distance(new Point(1, -1)), 0.0, ksiDelta);
     }
-
 
 
 }
