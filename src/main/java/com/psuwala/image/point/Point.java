@@ -2,6 +2,8 @@ package com.psuwala.image.point;
 
 import org.ejml.simple.SimpleMatrix;
 
+import java.util.Objects;
+
 import static java.lang.Math.cos;
 import static java.lang.Math.pow;
 import static java.lang.Math.sin;
@@ -65,7 +67,18 @@ public class Point implements Transformable<Point>{
         return translate(t.getCoords().negative()).rotate(angle).translate(t);
     }
 
-    public boolean equals(Point p){
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Point p = (Point) o;
+
         return (getX() == p.getX())&&(getY() == p.getY());
+    }
+
+    @Override
+    public int hashCode() {
+        return coords != null ? Objects.hash(getX(),getY()) : 0;
     }
 }
