@@ -73,4 +73,19 @@ public class Complex implements Transformable<Complex> {
                 ).min(Double::compare)
                 .get();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Complex c = (Complex) o;
+
+        return points != null ? points.equals(c.points) : c.points == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return points != null ? points.hashCode() : 0;
+    }
 }

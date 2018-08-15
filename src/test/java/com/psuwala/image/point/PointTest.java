@@ -31,11 +31,12 @@ public class PointTest {
     }
 
     @Test
-    public void testEquals() {
+    public void testEqualsHash() {
         Point p1 = new Point (4.20,2.137);
         Point p2 = new Point (4.20,2.137);
 
         assertTrue(p1.equals(p2));
+
     }
 
     @Test
