@@ -7,4 +7,5 @@ package com.psuwala.image.point;
  */
 public class Complex {
 
+
 }

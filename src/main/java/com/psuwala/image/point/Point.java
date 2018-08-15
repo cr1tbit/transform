@@ -11,7 +11,7 @@ import static java.lang.Math.sin;
  *
  * @since v7.4
  */
-public class Point {
+public class Point implements Transformable<Point>{
     final private SimpleMatrix coords;
 
     public SimpleMatrix getCoords() {
@@ -46,7 +46,7 @@ public class Point {
         return translate(new Point(x, y));
     }
 
-    public Point translate(Point p) {
+    public Point translate(Transformable p) {
         return translate(p.getCoords());
     }
 
@@ -61,7 +61,7 @@ public class Point {
         return new Point(rotationMatrix.mult(getCoords()));
     }
 
-    public Point rotateBy(double angle, Point p){
-        return translate(p.negative()).rotate(angle).translate(p);
+    public Point rotateBy(double angle, Transformable t){
+        return translate(t.getCoords().negative()).rotate(angle).translate(t);
     }
 }
