@@ -24,7 +24,7 @@ public class ComplexTest {
     public boolean ComplexEquals(Complex c1, Complex c2) {
 
     }
-*/
+    */
     @Test
     public void testComplexConstructors() {
         //create complex with 2 points
